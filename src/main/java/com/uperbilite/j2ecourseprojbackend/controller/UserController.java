@@ -12,7 +12,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     @GetMapping("/users")
     public List<User> getAllUser() {
