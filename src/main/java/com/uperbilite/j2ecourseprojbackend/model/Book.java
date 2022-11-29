@@ -1,4 +1,4 @@
-package com.uperbilite.j2ecourseprojbackend.bean;
+package com.uperbilite.j2ecourseprojbackend.model;
 
 public class Book {
     private int id;
