@@ -1,6 +1,6 @@
 package com.uperbilite.j2ecourseprojbackend.controller;
 
-import com.uperbilite.j2ecourseprojbackend.model.Book;
+import com.uperbilite.j2ecourseprojbackend.pojo.Book;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
