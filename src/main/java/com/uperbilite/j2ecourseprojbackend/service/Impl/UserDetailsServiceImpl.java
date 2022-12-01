@@ -1,4 +1,4 @@
-package com.uperbilite.j2ecourseprojbackend.service;
+package com.uperbilite.j2ecourseprojbackend.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.uperbilite.j2ecourseprojbackend.mapper.UserMapper;

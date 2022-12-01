@@ -1,8 +1,9 @@
-package com.uperbilite.j2ecourseprojbackend.service;
+package com.uperbilite.j2ecourseprojbackend.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.uperbilite.j2ecourseprojbackend.mapper.UserMapper;
 import com.uperbilite.j2ecourseprojbackend.pojo.User;
+import com.uperbilite.j2ecourseprojbackend.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
