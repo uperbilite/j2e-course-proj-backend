@@ -1,7 +1,7 @@
 package com.uperbilite.j2ecourseprojbackend.controller;
 
-import com.uperbilite.j2ecourseprojbackend.mapper.BookMapper;
 import com.uperbilite.j2ecourseprojbackend.pojo.Book;
+import com.uperbilite.j2ecourseprojbackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class BooksController {
+public class BookController {
 
     @Autowired
-    private BookMapper bookMapper;
+    private BookService bookService;
 
     @GetMapping("/books")
     public List<Book> getBookList() {
-        return bookMapper.selectList(null);
+        return bookService.getAllBooks();
     }
 
     @PostMapping("/books")
@@ -28,13 +28,16 @@ public class BooksController {
         String name = newBook.get("name");
         Integer price = Integer.parseInt(newBook.get("price"));
         String description = newBook.get("description");
-        String coverURL = newBook.get("cover");
+        String cover = newBook.get("cover");
 
-        Book book = new Book(null, name, price, description, coverURL);
-        bookMapper.insert(book);
-
+        Book book = new Book(null, name, price, description, cover);
         Map<String, String> result = new HashMap<>();
-        result.put("message", "success");
+
+        if (bookService.addBook(book)) {
+            result.put("message", "success");
+        } else {
+            result.put("message", "failed");
+        }
 
         return result;
     }
