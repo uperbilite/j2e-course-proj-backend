@@ -23,7 +23,6 @@ public class InfoServiceImpl implements InfoService {
         User user = userInfo.getUser();
 
         Map<String, String> result = new HashMap<>();
-        result.put("message", "success");
         result.put("id", user.getId().toString());
         result.put("username", user.getUsername());
 
