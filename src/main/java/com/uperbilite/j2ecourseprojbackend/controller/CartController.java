@@ -24,4 +24,10 @@ public class CartController {
         int bookId = Integer.parseInt(Item.get("bookId"));
         return cartService.addCartItem(userId, bookId);
     }
+
+    @DeleteMapping("/cart/{id}")
+    public Map<String, String> delCartItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
+        int bookId = Integer.parseInt(Item.get("bookId"));
+        return cartService.delCartItem(userId, bookId);
+    }
 }

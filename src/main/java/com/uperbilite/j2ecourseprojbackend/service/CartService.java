@@ -9,4 +9,6 @@ public interface CartService {
     List<Book> getAllItem(int userId);
 
     Map<String, String> addCartItem(int userId, int bookId);
+
+    Map<String, String> delCartItem(int userId, int bookId);
 }
