@@ -41,6 +41,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void delAllItem(int userId) {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("user_id", userId);
+        cartMapper.delete(new QueryWrapper<Item>().allEq(map));
+    }
+
+    @Override
     public Map<String, String> addCartItem(int userId, int bookId) {
         Map<String, String> result = new HashMap<>();
 

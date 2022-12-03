@@ -8,6 +8,8 @@ import java.util.Map;
 public interface CartService {
     List<Book> getAllItem(int userId);
 
+    void delAllItem(int userId);
+
     Map<String, String> addCartItem(int userId, int bookId);
 
     Map<String, String> delCartItem(int userId, int bookId);
