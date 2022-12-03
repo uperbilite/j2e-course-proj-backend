@@ -17,8 +17,14 @@ import java.util.Map;
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
+    /**
+     * 登录时获取用户的jwt token
+     * @param username 用户名
+     * @param password 密码
+     * @return jwt token
+     */
     @Override
     public Map<String, String> getToken(String username, String password) {
 

@@ -20,14 +20,18 @@ import java.util.Map;
 public class CheckoutServiceImpl implements CheckoutService {
 
     @Autowired
-    CartService cartService;
+    private CartService cartService;
 
     @Autowired
-    BookMapper bookMapper;
+    private BookMapper bookMapper;
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
+    /**
+     * 下单结算
+     * @return 成功以及失败的信息
+     */
     @Override
     public Map<String, String> checkout() {
         UsernamePasswordAuthenticationToken authentication =

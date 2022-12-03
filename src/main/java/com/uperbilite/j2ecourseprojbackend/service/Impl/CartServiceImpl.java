@@ -23,6 +23,11 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private BookMapper bookMapper;
 
+    /**
+     * 获取用户的购物车列表
+     * @param userId 用户id
+     * @return 该用户所有放入购物车的书
+     */
     @Override
     public List<Book> getItemList(int userId) {
         QueryWrapper<Item> itemQueryWrapper = new QueryWrapper<>();
@@ -40,6 +45,10 @@ public class CartServiceImpl implements CartService {
         return result;
     }
 
+    /**
+     * 清空用户的购物车
+     * @param userId 用户id
+     */
     @Override
     public void clearItemList(int userId) {
         Map<String, Integer> map = new HashMap<>();
@@ -47,6 +56,12 @@ public class CartServiceImpl implements CartService {
         cartMapper.delete(new QueryWrapper<Item>().allEq(map));
     }
 
+    /**
+     * 把书添加到购物车
+     * @param userId 用户id
+     * @param bookId 用户id
+     * @return 成功以及失败的信息
+     */
     @Override
     public Map<String, String> addItem(int userId, int bookId) {
         Map<String, String> result = new HashMap<>();
@@ -74,6 +89,12 @@ public class CartServiceImpl implements CartService {
         return result;
     }
 
+    /**
+     * 删除购物车的书
+     * @param userId 用户id
+     * @param bookId 书id
+     * @return 成功以及失败的信息
+     */
     @Override
     public Map<String, String> delItem(int userId, int bookId) {
         Map<String, String> result = new HashMap<>();

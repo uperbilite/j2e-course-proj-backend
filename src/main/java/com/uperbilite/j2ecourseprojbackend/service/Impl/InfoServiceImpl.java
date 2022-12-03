@@ -22,6 +22,7 @@ public class InfoServiceImpl implements InfoService {
         UserDetailsImpl userInfo = (UserDetailsImpl) authentication.getPrincipal();
         User user = userInfo.getUser();
 
+        // 获取用户信息
         Map<String, String> result = new HashMap<>();
         result.put("id", user.getId().toString());
         result.put("username", user.getUsername());

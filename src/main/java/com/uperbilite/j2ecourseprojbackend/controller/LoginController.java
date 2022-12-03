@@ -12,7 +12,7 @@ import java.util.Map;
 public class LoginController {
 
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     @PostMapping("/login")
     public Map<String, String> getToken(@RequestBody Map<String, String> userInfo) {
