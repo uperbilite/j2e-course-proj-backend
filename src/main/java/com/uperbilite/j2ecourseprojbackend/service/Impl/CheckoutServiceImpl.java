@@ -39,6 +39,12 @@ public class CheckoutServiceImpl implements CheckoutService {
         Map<String, String> result = new HashMap<>();
 
         List<Book> allBooks = cartService.getAllItem(user.getId());
+
+        if (allBooks.isEmpty()) {
+            result.put("message", "购物车为空");
+            return result;
+        }
+
         for (Book book : allBooks) {
             if (book.getStock() == 0) {
                 result.put("message", "《" + book.getName() + "》的库存不足");
