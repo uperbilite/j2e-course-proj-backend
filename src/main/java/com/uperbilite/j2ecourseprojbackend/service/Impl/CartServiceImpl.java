@@ -43,19 +43,26 @@ public class CartServiceImpl implements CartService {
     @Override
     public Map<String, String> addCartItem(int userId, int bookId) {
         Map<String, String> result = new HashMap<>();
-        QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
 
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.eq("id", bookId);
+        if (bookMapper.selectOne(bookQueryWrapper).getStock() == 0) {
+            result.put("message", "库存数量不足");
+            return result;
+        }
+
+        QueryWrapper<Item> itemQueryWrapper = new QueryWrapper<>();
         Map<String, Integer> map = new HashMap<>();
         map.put("user_id", userId);
         map.put("book_id", bookId);
-        queryWrapper.allEq(map);
-
-        if (cartMapper.selectList(queryWrapper).isEmpty()) {
-            cartMapper.insert(new Item(null, userId, bookId));
-            result.put("message", "success");
-        } else {
+        itemQueryWrapper.allEq(map);
+        if (!cartMapper.selectList(itemQueryWrapper).isEmpty()) {
             result.put("message", "不能重复添加");
+            return result;
         }
+
+        cartMapper.insert(new Item(null, userId, bookId));
+        result.put("message", "success");
 
         return result;
     }

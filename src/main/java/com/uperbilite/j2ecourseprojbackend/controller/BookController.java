@@ -26,11 +26,12 @@ public class BookController {
     @PostMapping("/books")
     public Map<String, String> addBook(@RequestBody Map<String, String> newBook) {
         String name = newBook.get("name");
-        Integer price = Integer.parseInt(newBook.get("price"));
         String description = newBook.get("description");
         String cover = newBook.get("cover");
+        Integer price = Integer.parseInt(newBook.get("price"));
+        Integer stock = 10;
 
-        Book book = new Book(null, name, price, description, cover);
+        Book book = new Book(null, name, description, cover, price, stock);
         Map<String, String> result = new HashMap<>();
 
         if (bookService.addBook(book)) {

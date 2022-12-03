@@ -13,7 +13,8 @@ public class Book {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String name;
-    private Integer price;
     private String description;
     private String cover;
+    private Integer price;
+    private Integer stock;
 }
