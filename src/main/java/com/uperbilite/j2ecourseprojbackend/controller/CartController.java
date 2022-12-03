@@ -15,19 +15,19 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/cart/{id}")
-    public List<Book> getAllItem(@PathVariable("id") Integer userId) {
-        return cartService.getAllItem(userId);
+    public List<Book> getItemList(@PathVariable("id") Integer userId) {
+        return cartService.getItemList(userId);
     }
 
     @PostMapping("/cart/{id}")
-    public Map<String, String> addCartItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
+    public Map<String, String> addItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
         int bookId = Integer.parseInt(Item.get("bookId"));
-        return cartService.addCartItem(userId, bookId);
+        return cartService.addItem(userId, bookId);
     }
 
     @DeleteMapping("/cart/{id}")
-    public Map<String, String> delCartItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
+    public Map<String, String> delItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
         int bookId = Integer.parseInt(Item.get("bookId"));
-        return cartService.delCartItem(userId, bookId);
+        return cartService.delItem(userId, bookId);
     }
 }

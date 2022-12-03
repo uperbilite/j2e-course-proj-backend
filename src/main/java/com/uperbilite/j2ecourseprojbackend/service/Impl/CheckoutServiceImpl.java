@@ -38,21 +38,21 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         Map<String, String> result = new HashMap<>();
 
-        List<Book> allBooks = cartService.getAllItem(user.getId());
+        List<Book> itemList = cartService.getItemList(user.getId());
 
-        if (allBooks.isEmpty()) {
+        if (itemList.isEmpty()) {
             result.put("message", "购物车为空");
             return result;
         }
 
-        for (Book book : allBooks) {
+        for (Book book : itemList) {
             if (book.getStock() == 0) {
                 result.put("message", "《" + book.getName() + "》的库存不足");
                 return result;
             }
         }
 
-        int totalPrice = allBooks.stream().map(Book::getPrice).reduce(0, Integer::sum);
+        int totalPrice = itemList.stream().map(Book::getPrice).reduce(0, Integer::sum);
         if (user.getBalance() < totalPrice) {
             result.put("message", "余额不足");
             return result;
@@ -63,13 +63,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         userMapper.updateById(user);
 
         // 减去库存
-        for (Book book : allBooks) {
+        for (Book book : itemList) {
             book.setStock(book.getStock() - 1);
             bookMapper.updateById(book);
         }
 
         // 清空购物车
-        cartService.delAllItem(user.getId());
+        cartService.clearItemList(user.getId());
 
         result.put("message", "success");
 

@@ -24,14 +24,14 @@ public class CartServiceImpl implements CartService {
     private BookMapper bookMapper;
 
     @Override
-    public List<Book> getAllItem(int userId) {
+    public List<Book> getItemList(int userId) {
         QueryWrapper<Item> itemQueryWrapper = new QueryWrapper<>();
         itemQueryWrapper.eq("user_id", userId);
 
         List<Book> result = new ArrayList<>();
 
-        List<Item> allBookFromUser = cartMapper.selectList(itemQueryWrapper);
-        for (Item i : allBookFromUser) {
+        List<Item> itemList = cartMapper.selectList(itemQueryWrapper);
+        for (Item i : itemList) {
             QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
             bookQueryWrapper.eq("id", i.getBookId());
             result.add(bookMapper.selectOne(bookQueryWrapper));
@@ -41,14 +41,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void delAllItem(int userId) {
+    public void clearItemList(int userId) {
         Map<String, Integer> map = new HashMap<>();
         map.put("user_id", userId);
         cartMapper.delete(new QueryWrapper<Item>().allEq(map));
     }
 
     @Override
-    public Map<String, String> addCartItem(int userId, int bookId) {
+    public Map<String, String> addItem(int userId, int bookId) {
         Map<String, String> result = new HashMap<>();
 
         QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
@@ -75,7 +75,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Map<String, String> delCartItem(int userId, int bookId) {
+    public Map<String, String> delItem(int userId, int bookId) {
         Map<String, String> result = new HashMap<>();
         QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
 
