@@ -16,7 +16,7 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public List<Book> getAllBooks() {
+    public List<Book> getBookList() {
         return bookMapper.selectList(null);
     }
 

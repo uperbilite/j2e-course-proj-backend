@@ -20,7 +20,7 @@ public class BookController {
 
     @GetMapping("/books")
     public List<Book> getBookList() {
-        return bookService.getAllBooks();
+        return bookService.getBookList();
     }
 
     @PostMapping("/books")
@@ -29,6 +29,7 @@ public class BookController {
         String description = newBook.get("description");
         String cover = newBook.get("cover");
         Integer price = Integer.parseInt(newBook.get("price"));
+        // TODO: 先默认设置为10
         Integer stock = 10;
 
         Book book = new Book(null, name, description, cover, price, stock);
