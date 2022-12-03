@@ -14,20 +14,20 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping("/cart/{id}")
-    public List<Book> getItemList(@PathVariable("id") Integer userId) {
-        return cartService.getItemList(userId);
+    @GetMapping("/cart")
+    public List<Book> getItemList() {
+        return cartService.getItemList();
     }
 
-    @PostMapping("/cart/{id}")
-    public Map<String, String> addItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
+    @PostMapping("/cart")
+    public Map<String, String> addItem(@RequestBody Map<String, String> Item) {
         int bookId = Integer.parseInt(Item.get("bookId"));
-        return cartService.addItem(userId, bookId);
+        return cartService.addItem(bookId);
     }
 
-    @DeleteMapping("/cart/{id}")
-    public Map<String, String> delItem(@PathVariable("id") Integer userId, @RequestBody Map<String, String> Item) {
+    @DeleteMapping("/cart")
+    public Map<String, String> delItem(@RequestBody Map<String, String> Item) {
         int bookId = Integer.parseInt(Item.get("bookId"));
-        return cartService.delItem(userId, bookId);
+        return cartService.delItem(bookId);
     }
 }

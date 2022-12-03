@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface CartService {
-    List<Book> getItemList(int userId);
+    List<Book> getItemList();
 
-    void clearItemList(int userId);
+    void clearItemList();
 
-    Map<String, String> addItem(int userId, int bookId);
+    Map<String, String> addItem(int bookId);
 
-    Map<String, String> delItem(int userId, int bookId);
+    Map<String, String> delItem(int bookId);
 }

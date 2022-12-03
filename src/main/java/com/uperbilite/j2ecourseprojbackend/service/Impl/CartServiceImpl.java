@@ -5,8 +5,12 @@ import com.uperbilite.j2ecourseprojbackend.mapper.BookMapper;
 import com.uperbilite.j2ecourseprojbackend.mapper.CartMapper;
 import com.uperbilite.j2ecourseprojbackend.pojo.Book;
 import com.uperbilite.j2ecourseprojbackend.pojo.Item;
+import com.uperbilite.j2ecourseprojbackend.pojo.User;
 import com.uperbilite.j2ecourseprojbackend.service.CartService;
+import com.uperbilite.j2ecourseprojbackend.utils.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,15 +27,24 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private BookMapper bookMapper;
 
+    private static int getUserId() {
+        UsernamePasswordAuthenticationToken authentication =
+                (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+
+        UserDetailsImpl userInfo = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userInfo.getUser();
+
+        return user.getId();
+    }
+
     /**
      * 获取用户的购物车列表
-     * @param userId 用户id
      * @return 该用户所有放入购物车的书
      */
     @Override
-    public List<Book> getItemList(int userId) {
+    public List<Book> getItemList() {
         QueryWrapper<Item> itemQueryWrapper = new QueryWrapper<>();
-        itemQueryWrapper.eq("user_id", userId);
+        itemQueryWrapper.eq("user_id", getUserId());
 
         List<Book> result = new ArrayList<>();
 
@@ -47,24 +60,23 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 清空用户的购物车
-     * @param userId 用户id
      */
     @Override
-    public void clearItemList(int userId) {
+    public void clearItemList() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("user_id", userId);
+        map.put("user_id", getUserId());
         cartMapper.delete(new QueryWrapper<Item>().allEq(map));
     }
 
     /**
      * 把书添加到购物车
-     * @param userId 用户id
-     * @param bookId 用户id
+     * @param bookId 书id
      * @return 成功以及失败的信息
      */
     @Override
-    public Map<String, String> addItem(int userId, int bookId) {
+    public Map<String, String> addItem(int bookId) {
         Map<String, String> result = new HashMap<>();
+        int userId = getUserId();
 
         QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
         bookQueryWrapper.eq("id", bookId);
@@ -91,14 +103,14 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 删除购物车的书
-     * @param userId 用户id
      * @param bookId 书id
      * @return 成功以及失败的信息
      */
     @Override
-    public Map<String, String> delItem(int userId, int bookId) {
+    public Map<String, String> delItem(int bookId) {
         Map<String, String> result = new HashMap<>();
         QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
+        int userId = getUserId();
 
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", userId);

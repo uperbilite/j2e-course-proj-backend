@@ -42,7 +42,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         Map<String, String> result = new HashMap<>();
 
-        List<Book> itemList = cartService.getItemList(user.getId());
+        List<Book> itemList = cartService.getItemList();
 
         if (itemList.isEmpty()) {
             result.put("message", "购物车为空");
@@ -73,7 +73,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         }
 
         // 清空购物车
-        cartService.clearItemList(user.getId());
+        cartService.clearItemList();
 
         result.put("message", "success");
 
