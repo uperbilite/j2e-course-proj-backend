@@ -39,6 +39,7 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 获取用户的购物车列表
+     *
      * @return 该用户所有放入购物车的书
      */
     @Override
@@ -70,6 +71,7 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 把书添加到购物车
+     *
      * @param bookId 书id
      * @return 成功以及失败的信息
      */
@@ -103,6 +105,7 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 删除购物车的书
+     *
      * @param bookId 书id
      * @return 成功以及失败的信息
      */

@@ -30,6 +30,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
     /**
      * 下单结算
+     *
      * @return 成功以及失败的信息
      */
     @Override
@@ -41,7 +42,6 @@ public class CheckoutServiceImpl implements CheckoutService {
         User user = userInfo.getUser();
 
         Map<String, String> result = new HashMap<>();
-
         List<Book> itemList = cartService.getItemList();
 
         if (itemList.isEmpty()) {

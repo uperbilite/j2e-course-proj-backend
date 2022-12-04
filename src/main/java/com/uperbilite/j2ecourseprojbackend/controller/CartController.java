@@ -21,13 +21,11 @@ public class CartController {
 
     @PostMapping("/cart")
     public Map<String, String> addItem(@RequestBody Map<String, String> Item) {
-        int bookId = Integer.parseInt(Item.get("bookId"));
-        return cartService.addItem(bookId);
+        return cartService.addItem(Integer.parseInt(Item.get("bookId")));
     }
 
     @DeleteMapping("/cart")
     public Map<String, String> delItem(@RequestBody Map<String, String> Item) {
-        int bookId = Integer.parseInt(Item.get("bookId"));
-        return cartService.delItem(bookId);
+        return cartService.delItem(Integer.parseInt(Item.get("bookId")));
     }
 }
